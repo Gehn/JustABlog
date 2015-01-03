@@ -217,14 +217,14 @@ class BlogInitializationTests(unittest.TestCase):
 	def test_initialization_with_config_file(self):
 		test_title = "TESTTITLE"
 		test_sub_title = "TESTSUBTITLE"
-		test_file_root = "./tests/articles"
+		test_article_dir = "./tests/articles"
 		test_staging_root = "./tests/staging"
 
 		cfg_file_body = ""
 		cfg_file_body += "title = %s\n" % (test_title,)
 		cfg_file_body += "sub_title = %s\n" % (test_sub_title,)
-		cfg_file_body += "file_root = %s\n" % (test_file_root,)
-		cfg_file_body += "staging = %s\n" % (test_staging_root,)
+		cfg_file_body += "article_dir = %s\n" % (test_article_dir,)
+		cfg_file_body += "staging_dir = %s\n" % (test_staging_root,)
 
 		cfg_file_path = "./tests/test_cfg.ini"
 
@@ -235,8 +235,8 @@ class BlogInitializationTests(unittest.TestCase):
 
 		self.assertEqual(blog_instance.title, test_title)
 		self.assertEqual(blog_instance.sub_title, test_sub_title)
-		self.assertEqual(blog_instance.file_root, test_file_root)
-		self.assertEqual(blog_instance.staging, test_staging_root)
+		self.assertEqual(blog_instance.article_dir, test_article_dir)
+		self.assertEqual(blog_instance.staging_dir, test_staging_root)
 
 
 	def test_parse_articles_empty_dir(self):
@@ -250,7 +250,7 @@ class BlogInitializationTests(unittest.TestCase):
 		except OSError as e:
 			pass
 
-		blog_instance.file_root = empty_dir
+		blog_instance.article_dir = empty_dir
 
 		blog_instance.parseArticles()
 
@@ -273,7 +273,7 @@ class BlogInitializationTests(unittest.TestCase):
 		open(os.path.join(populated_dir, test_article_1), "w")
 		open(os.path.join(populated_dir, test_article_2), "w")
 
-		blog_instance.file_root = populated_dir
+		blog_instance.article_dir = populated_dir
 
 		blog_instance.parseArticles()
 
@@ -292,7 +292,7 @@ class BlogInitializationTests(unittest.TestCase):
 		except OSError as e:
 			pass
 
-		blog_instance.staging = empty_dir
+		blog_instance.staging_dir = empty_dir
 
 		blog_instance.parseStagedArticles()
 
@@ -315,7 +315,7 @@ class BlogInitializationTests(unittest.TestCase):
 		open(os.path.join(populated_dir, test_article_1), "w")
 		open(os.path.join(populated_dir, test_article_2), "w")
 
-		blog_instance.staging = populated_dir
+		blog_instance.staging_dir = populated_dir
 
 		blog_instance.parseStagedArticles()
 

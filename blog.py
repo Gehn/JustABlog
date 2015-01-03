@@ -113,15 +113,15 @@ class Blog:
 		"""
 			Initialize a blog object.
 		
-			Reads title, sub_title, file_root and staging from config file.
+			Reads title, sub_title, article_dir and staging from config file.
 		
 			:param cfg_path: the config file for the blog.
 		"""
 		self.cfg_path = cfg_path
 		self.title = 'DebugThePlanet'
 		self.sub_title = 'A place to write about things.'
-		self.file_root = './articles/'
-		self.staging = './staging/'
+		self.article_dir = './articles/'
+		self.staging_dir = './staging/'
 		self.categories = defaultdict(list)
 		self.tags = defaultdict(list)
 		self.articles = {}
@@ -139,7 +139,7 @@ class Blog:
 	def loadConfig(self, cfg_path):
 		"""
 			Load various metadata from the config file.
-			(title, sub_title, file_root, staging)
+			(title, sub_title, article_dir, staging_dir)
 		
 			:param cfg_path: The path to the config file.
 		"""
@@ -151,10 +151,10 @@ class Blog:
 					self.title = value
 				if parameter == 'sub_title':
 					self.sub_title = value
-				if parameter == 'file_root':
-					self.file_root = value
-				if parameter == 'staging':
-					self.staging = value
+				if parameter == 'article_dir':
+					self.article_dir = value
+				if parameter == 'staging_dir':
+					self.staging_dir = value
 			except IndexError as e:
 				pass
 
@@ -172,12 +172,12 @@ class Blog:
 					Log('Deploy gate failed, TODO found.  (Article: %s)' % (title,))
 					break
 				try:
-					os.makedirs(self.file_root)
+					os.makedirs(self.article_dir)
 				except OSError as e:
 					pass
 
-				shutil.move(article.path, self.file_root)
-				article.path = os.path.join(self.file_root, os.path.basename(article.path))
+				shutil.move(article.path, self.article_dir)
+				article.path = os.path.join(self.article_dir, os.path.basename(article.path))
 				article.setWebPath('/articles/' + title)
 				self.indexArticle(article)
 				deploy_count += 1
@@ -189,7 +189,7 @@ class Blog:
 		"""
 			Ingest all files in the staging directory as Articles.
 		"""
-		for dirpath, dirnames, filenames in os.walk(self.staging):
+		for dirpath, dirnames, filenames in os.walk(self.staging_dir):
 			for filename in filenames:
 				try:
 					self.parseStagedArticle(os.path.join(dirpath, filename))
@@ -216,7 +216,7 @@ class Blog:
 		"""
 			Ingest all files in the articles directory as Articles.
 		"""
-		for dirpath, dirnames, filenames in os.walk(self.file_root):
+		for dirpath, dirnames, filenames in os.walk(self.article_dir):
 			for filename in filenames:
 				try:
 					self.parseArticle(os.path.join(dirpath, filename))
