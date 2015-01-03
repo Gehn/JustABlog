@@ -1,17 +1,19 @@
 # Embedded file name: blog.py
-import os
-import datetime
-import string
-import shelve
+
+#TODO: probably make most of the imports from style.
 from collections import defaultdict
-from bottle import route, run, template
+import datetime
 from datetime import date
-import shutil
+import os
 import re
-import urllib
+import shutil
 import traceback
-from utilities import Log
+import urllib
+
+from bottle import route, run, template
 from transformations import Transform
+from utilities import Log
+
 
 class Article:
 	"""

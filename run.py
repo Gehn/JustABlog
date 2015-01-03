@@ -1,14 +1,9 @@
 #!/usr/bin/env python
 
-import subprocess
-import sys
-import runpy
-
-from bottle import run
 import routes
+import runpy
+import sys
 
-import tests.tests
-from tests.tests import *
 
 def ParseArgs():
 	# So that we can be 2.[67] compatible.
@@ -51,4 +46,3 @@ if __name__ == "__main__":
 		routes.Run(kwargs.config)
 
 
-#Movie 1:10

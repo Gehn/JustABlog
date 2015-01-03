@@ -1,21 +1,16 @@
 #!/usr/bin/env python3
 
-import os
-import datetime
-import string
-import shelve
-from collections import defaultdict
-
-from bottle import route, run, template, jinja2_view, url, Jinja2Template, response
-from datetime import date
-import shutil
-import re
-import urllib
 import functools
-
-from utilities import Log
+import os
+import string
+import urllib
 
 from blog import Blog
+from bottle import route, run, template, jinja2_view, url, Jinja2Template, response
+from utilities import Log
+
+
+
 
 # ----- INITIALIZE THE BLOG ----- #
 
