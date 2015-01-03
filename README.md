@@ -1,4 +1,4 @@
-DebugTheBlog: A micro blog framework
+JustABlog: A micro blog framework
 ====================================
 
 
