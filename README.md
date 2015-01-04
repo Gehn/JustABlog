@@ -15,6 +15,7 @@ Version 1.0
 Requirements:
 =============
 Python 2.6-2.7 compatible (3 WIP, pending a potential bug in bottle)
+Uses bottle to serve http.
 
 
 To Configure:
@@ -32,7 +33,10 @@ These do not have to be defined.
 
 API:
 ====
-Articles may be deployed with /deploy/<staged article>, disallowed if there is a TODO: in the body.
+/deploy/<staged article> : Deploys the staged article, disallowed if there is a TODO: in the body.
 
 
+Examples:
+=========
+See Example_Article.html for a more detailed example.
 

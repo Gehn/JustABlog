@@ -50,14 +50,20 @@ def sanitize(callback):
 				sanitized_args.append(urllib.unquote(arg))
 				for char in arg:
 					if char not in whitelist:
-						assert False, "Invalid post character"
+						response.status = 303
+						response.set_header('Location', '/error')
+						Log("Invalid post character: %s" % (arg,))
+						return {}
 
 		for (key, value) in kwargs.items():
 			if value.__class__.__name__ == "str":
 				sanitized_kwargs[key] = urllib.unquote(value)
 				for char in value:
 					if char not in whitelist:
-						assert False, "Invalid post character"
+						response.status = 303
+						response.set_header('Location', '/error')
+						Log("Invalid post character: %s" % (value,))
+						return {}
 
 		return callback(*args, **kwargs)
 
@@ -124,9 +130,10 @@ def viewStagedArticle(post):
 		response.status = 303
 		response.set_header('Location', '/articles/' + post)
 		return {}
-#		return {'content': article.body}
 
-	return {'content': "Deployed 0 articles, possible error?"}
+	response.status = 303
+	response.set_header('Location', '/error')
+	return {}
 
 
 @route("/<year:int>")
@@ -168,7 +175,6 @@ def searchtags():
 	return {"content": "".join(content)}
 
 
-
 @route("/tag/<tag>")
 @sanitize
 @view("articleList.tpl")
@@ -177,6 +183,7 @@ def searchByTag(tag):
 
 	return {"article_list": articles}
 
+
 @route("/tag")
 @sanitize
 @view("basePage.tpl")
@@ -184,6 +191,12 @@ def searchTags():
 	content = [make_link("/tag/" + tag, tag) + "<br>" for tag in blog_instance.getTags()]
 	return {"content": "".join(content)}
 
+
+@route("/error")
+@sanitize
+@view("basePage.tpl")
+def searchTags():
+	return {"content": "Something happened.  See server logs to find out what."}
 
 
 def Run(config_path=None):
