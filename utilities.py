@@ -31,6 +31,7 @@ def Log(message, *args):
 
 	if _LoggingContext.logfile:
 		_LoggingContext.logfile.write(str(message) + '\n')
+		_LoggingContext.logfile.flush()
 	else:
 		print(message)
 

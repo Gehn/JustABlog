@@ -199,7 +199,7 @@ def searchTags():
 	return {"content": "Something happened.  See server logs to find out what."}
 
 
-def Run(config_path=None):
+def Run(host="localhost", port="80", config_path=None):
 	'''
 		Run the web server for the site specified by the routes in this module.
 
@@ -207,7 +207,7 @@ def Run(config_path=None):
 	'''
 	if config_path:
 		blog_instance.loadConfig(config_path)
-	run(host='localhost', port=8080)
+	run(host=host, port=port)
 
 
 if __name__=="__main__":

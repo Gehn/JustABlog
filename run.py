@@ -20,6 +20,8 @@ def ParseArgs():
 		use_optparse = True
 
 	add_argument("-c", "--config", dest="config", default="blog.ini", help="Blog configuration file.")
+	add_argument("--host", dest="host", default="localhost", help="Host to run the blog as.")
+	add_argument("--port", dest="port", default="80", help="Port to run the blog on.")
 
 	kwargs = argparser.parse_args()
 	args = []
@@ -43,6 +45,6 @@ if __name__ == "__main__":
 		runpy.run_module("tests/tests", None,  "__main__", True)
 		print "\n"
 	else:
-		routes.Run(kwargs.config)
+		routes.Run(host=kwargs.host, port=kwargs.port, config_path=kwargs.config)
 
 
