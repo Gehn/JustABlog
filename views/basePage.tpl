@@ -50,6 +50,7 @@
 				top:150px;
 				left:40px;
 				border-right: 1px solid #bbb;
+				width:170px;
 
 			}
 			.indexTitle
@@ -65,10 +66,15 @@
 				font-family: 'Michroma', sans-serif;
 				font-size:100%;
 				color:#000;
+				word-wrap: break-word;
 			}
 			.tab
 			{
 				padding-left:5em
+			}
+			.contentHeader
+			{
+				font-weight:bold;
 			}
 
 		</style>

@@ -279,7 +279,10 @@ class BlogInitializationTests(unittest.TestCase):
 
 		self.assertEqual(len(blog_instance.getArticles()), 2)
 		self.assertEqual(blog_instance.getArticle(test_article_1).title, test_article_1)
+		self.assertEqual(blog_instance.getArticle(test_article_1).web_path, "/articles/" + test_article_1)
 		self.assertEqual(blog_instance.getArticle(test_article_2).title, test_article_2)
+		self.assertEqual(blog_instance.getArticle(test_article_2).web_path, "/articles/" + test_article_2)
+		
 
 
 	def test_parse_staging_empty_dir(self):
@@ -321,7 +324,9 @@ class BlogInitializationTests(unittest.TestCase):
 
 		self.assertEqual(len(blog_instance.getStagedArticles()), 2)
 		self.assertEqual(blog_instance.getStagedArticle(test_article_1).title, test_article_1)
+		self.assertEqual(blog_instance.getStagedArticle(test_article_1).web_path, "/staging/" + test_article_1)
 		self.assertEqual(blog_instance.getStagedArticle(test_article_2).title, test_article_2)
+		self.assertEqual(blog_instance.getStagedArticle(test_article_2).web_path, "/staging/" + test_article_2)
 
 
 	def test_index_single_article(self):

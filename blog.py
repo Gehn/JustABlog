@@ -120,8 +120,8 @@ class Blog:
 			:param cfg_path: the config file for the blog.
 		"""
 		self.cfg_path = cfg_path
-		self.title = 'DebugThePlanet'
-		self.sub_title = 'A place to write about things.'
+		self.title = 'Just A Blog'
+		self.sub_title = 'I promise, it is.'
 		self.article_dir = './articles/'
 		self.staging_dir = './staging/'
 		self.categories = defaultdict(list)
@@ -238,7 +238,7 @@ class Blog:
 		"""
 		Log('Parsing article: ' + article_path)
 		article = Article(article_path)
-		article.setWebPath('/articles/' + self.title)
+		article.setWebPath('/articles/' + article.title)
 		self.indexArticle(article)
 		return article
 
